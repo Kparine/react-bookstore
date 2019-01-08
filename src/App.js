@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import Book from './Books'
+import Books from './BookList'
 import Cart from './Cart'
 import NavHeader from './NavHeader';
 import Footer from './Footer'
+import BookList from './BookList';
 
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <div className="App">
        <NavHeader />
+       <BookList />
        <Footer />
       </div>
     );

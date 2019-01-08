@@ -1,49 +1,16 @@
-import React, { Component } from 'react';
-const url = process.env.REACT_APP_BASE_URL
-import axios from 'axios'
+import React from 'react'
 
-
-export default class BookList extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      books: [
-        {id: 0, title: ' ', author:'', pages:'', inCart: false}
-      ]
-    }
-  }
-
-async componentDidMount(){
-  this.getBooks()
-}
-
-getBooks = async () => {
-  try {
-    const response = await axios.get('http://localhost:8082/api/books')
-    this.setState({books: response.data.books})
-  } 
-  catch(err){
-    console.log(err)
-  }
-}
-
-newBook = () => {
-  axios.post('http://localhost:8082/api/books')
-  .then((data) => {
-    this.getBooks()
-  })
-  .catch(console.error)
-}
-
-
-
-render() {
-   return (
-    <div>
-    
+function Books ({id, title, author, pages, inCart}) {
+  return (
+  <div className="list-group-item">
+    <div className="row">
+      <div className="col-md-4">{title}</div>
+      <div className="col-md-2">{author}</div>
+      <div className="col-md-2">{pages}</div>
+      {/* <button className="col-md-2 btn btn-info add-button" onClick={() => handleAddToCart(id)}>Add to Cart</button>4ed */}
     </div>
-    )}
+  </div>
+  )
 }
 
 export default Books
