@@ -42,7 +42,7 @@ handleAddToCart = (id) => {
 render() {
    return (
     <div>
-      <BookList  />
+      {this.state.books.map(book => <Books {...book}/>)}
     </div>
     )}
 }
