@@ -9,7 +9,7 @@ function NavHeader(props) {
   return (
     <nav className="navbar navbar-dark" style={headStyle}>
       <a className="navbar-brand" href="#"><strong>🛒 Cart </strong></a>
-      <SearchBar />
+      <SearchBar handleSearch={props.handleSearch} />
     </nav>
   )
 }
