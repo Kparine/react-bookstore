@@ -39,6 +39,7 @@ handleAddToCart = (id) => {
 
 
 
+
 render() {
    return (
     <div>
