@@ -8,7 +8,7 @@ const headStyle = {
 function NavHeader(props) {
   return (
     <nav className="navbar navbar-dark" style={headStyle}>
-      <a className="navbar-brand" href="#"><strong>🛒 Cart </strong></a>
+      <a className="navbar-brand"><strong><span aria-label='cart'>📚 </span> Bezo's Bargain Books </strong></a>
       <SearchBar handleSearch={props.handleSearch} />
     </nav>
   )

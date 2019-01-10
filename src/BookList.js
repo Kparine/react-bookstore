@@ -9,29 +9,7 @@ export default class BookList extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      books: []
-    }
   }
-
-//////////////////////// GET ALL BOOKS ////////////////////////
-
-async componentDidMount(){
-  this.getBooks()
-}
-
-
-getBooks = async () => {
-  try {
-    const response = await axios.get(url)
-    this.setState({
-      books: response.data
-    })
-  } 
-  catch(err){
-    console.log(err)
-  }
-}
 
 //////////////////////// SEARCH ALL BOOKS ////////////////////////
 
@@ -47,12 +25,12 @@ byColumns = (a, b) => {
 }
 
 render() {
-  const filteredBooks = this.state.books.filter(this.searchBook)
+  const filteredBooks = this.props.books.filter(this.searchBook)
    return (
     <div>
       {
         filteredBooks.length !== 0 ?
-        filteredBooks.sort(this.byColumns).map(book => <Books {...book}/>) :
+        filteredBooks.sort(this.byColumns).map(book => <Books key={book.id} toggleCart={this.props.toggleCart} {...book}/>) :
         <div> Title does not exist...</div>
         }
     </div>

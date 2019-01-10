@@ -1,29 +1,24 @@
 import React from 'react'
 import CartItem from './CartItem'
 
-function Cart(props){
+
+const CartList = ({id, inCart, toggleCart }) => {
   return (
     <div className="container">
-    <h1>Your Cart Item(s)</h1>
+    <h5>Your Cart Item(s)</h5>
       <div className="list-group">
         <div className="list-group-item">
-          <div className="row">
-            <div className="col-md-8">Book</div>
-            <div className="col-md-8">Price</div>
-            <div className="col-md-8">Quantity</div>
-          </div>
+        <div className="row">
+          <div className="col-md-2"><strong> Title </strong></div>
+            <div className="col-md-2"><strong> Author </strong></div>
+            <div className="col-md-2"><strong> Price </strong></div>
+            </div>
         </div>
-        { props.CartList.map(({Book : title, author, price, quantity, id })=> 
-        <CartItem 
-        key= { id }
-        title= { title }
-        author= { author }
-        price= { price }
-        quantity= { quantity }
-        />
-        )}
+        {inCart.map(book => {
+          return <CartItem key={book.id} {...book} toggleCart={ toggleCart }/>
+        })}
       </div>
     </div>
   )
 }
-export default Cart
+export default CartList
