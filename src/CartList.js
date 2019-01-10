@@ -1,7 +1,7 @@
 import React from 'react'
 import CartItem from './CartItem'
 
-function CartItems(props){
+function Cart(props){
   return (
     <div className="container">
     <h1>Your Cart Item(s)</h1>
@@ -13,9 +13,10 @@ function CartItems(props){
             <div className="col-md-8">Quantity</div>
           </div>
         </div>
-        { props.cartItemsList.map(({Book : title, author, price, quantity, id })=> 
+        { props.CartList.map(({Book : title, author, price, quantity, id })=> 
         <CartItem 
         key= { id }
+        title= { title }
         author= { author }
         price= { price }
         quantity= { quantity }
@@ -25,4 +26,4 @@ function CartItems(props){
     </div>
   )
 }
-export default CartItems
+export default Cart

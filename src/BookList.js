@@ -46,13 +46,6 @@ byColumns = (a, b) => {
   return a[this.props.sortBy] > b[this.props.sortBy] ? 1 : -1
 }
 
-// handleAddToCart = (id) => {
-//   axios.put(`url/cart/add/${id}`)
-//     .then(() => {
-//       this.getBooks()
-//     })
-// }
-
 render() {
   const filteredBooks = this.state.books.filter(this.searchBook)
    return (
