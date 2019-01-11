@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import Books from './Books'
-
-const url = process.env.REACT_APP_BASE_URL
-
 
 export default class BookList extends Component {
 

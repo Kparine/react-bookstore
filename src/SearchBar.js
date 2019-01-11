@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 
 
-const btnStyle = {
-  background: '#15448c',
-  color: 'smoke'
-}
-
-
 class SearchBar extends Component {
   render() {
     return (
