@@ -1,7 +1,5 @@
 import React from 'react'
 import CartItem from './CartItem'
-// import total from './CartTotal'
-import Books from './Books';
 
 const CartList = ({id, inCart, toggleCart, total }) => {
   return (

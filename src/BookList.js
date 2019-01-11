@@ -20,6 +20,8 @@ byColumns = (a, b) => {
   return a[this.props.sortBy] > b[this.props.sortBy] ? 1 : -1
 }
 
+//////////////////////// RENDER BOOKS ////////////////////////
+
 render() {
   const filteredBooks = this.props.books.filter(this.searchBook)
    return (

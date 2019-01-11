@@ -4,6 +4,7 @@ import Footer from './Footer'
 import BookList from './BookList';
 import axios from 'axios'
 import CartList from './CartList';
+import Admin from './Admin'
 
 const url = process.env.REACT_APP_BASE_URL
 
@@ -48,7 +49,19 @@ class App extends Component {
       this.getBooks()
     }
     
+    removeFromStore = async(id) => {
+      await axios.delete(`${url}/:id`)
+    }
     
+    addToStore = async(id) => {
+      await axios.patch(`${url}/:id`)
+    }
+
+    updateStore = async(id) => {
+      await axios.patch(`${url}/:id`)
+    }
+
+
     getBooks = async () => {
       try {
         const response = await axios.get(url)
@@ -75,7 +88,7 @@ class App extends Component {
               toggleCart={ this.toggleCart }
             /> :  null
            }
-            
+            <Admin toggleAdmin={this.toggleAdmin} />  
           <Footer />
       </div>
     );
