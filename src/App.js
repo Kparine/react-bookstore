@@ -49,17 +49,17 @@ class App extends Component {
       this.getBooks()
     }
     
-    removeFromStore = async(id) => {
-      await axios.delete(`${url}/:id`)
-    }
+    // removeFromStore = async(id) => {
+    //   await axios.delete(`${url}/:id`)
+    // }
     
-    addToStore = async(id) => {
-      await axios.patch(`${url}/:id`)
-    }
+    // addToStore = async(id) => {
+    //   await axios.patch(`${url}/:id`)
+    // }
 
-    updateStore = async(id) => {
-      await axios.patch(`${url}/:id`)
-    }
+    // updateStore = async(id) => {
+    //   await axios.patch(`${url}/:id`)
+    // }
 
 
     getBooks = async () => {
