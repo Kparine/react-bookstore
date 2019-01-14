@@ -12,6 +12,7 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin,
   return (
   <div className="list-group-item">
     <div className="row" style={rowStyle}>
+    
       <div className="col-md-3">{title}</div>
       <div className="col-md-2">{author}</div>
       <div className="col-md-2">{pages} pages</div>
@@ -21,9 +22,6 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin,
         <span><strong>🛒  </strong> Remove from Cart </span> :
         <span><strong>🛒  </strong>  Add to Cart</span> 
       }
-         {/* toggleAdmin ? */}
-        {/* <button className="col-md-1 btn remove-button" style={btnStyle} onclick={()=> editAdmin(id)}>Edit</button> :
-        <button className="col-md-1 btn remove-button" style={btnStyle} onclick={()=> deleteAdmin(id)}>Delete</button> */}
       </button>
     </div>
   </div>

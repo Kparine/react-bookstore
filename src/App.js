@@ -4,6 +4,7 @@ import Footer from './Footer'
 import BookList from './BookList';
 import axios from 'axios'
 import CartList from './CartList';
+import EditBook from './Admin'
 
 const url = process.env.REACT_APP_BASE_URL
 
@@ -16,7 +17,9 @@ class App extends Component {
       sortBy:'title',
       books: [],
       inCart: [],
-      admin: false
+      admin: false,
+      editing: true
+
     }
   }
     handleSearch = (e) => {
@@ -24,7 +27,22 @@ class App extends Component {
         searchString: e.target.value
       })
     }
+
+////////////////////////////// TOGGLE ADMIN //////////////////////////////
+
+    toggleAdmin = async(id) => {
+      const book = this.state.books.find(book => book.id === id)
+
+      if (this.state.editing){
+          return true 
+       } else {
+          return false
+        }
+      }
   
+////////////////////////////// TOGGLE CART //////////////////////////////
+
+
     toggleCart = async(id) => {
       const book = this.state.books.find(book => book.id === id)
           
@@ -34,7 +52,7 @@ class App extends Component {
         this.addToCart(id, book)
       }
     }
-     addToCart = async(id, book) =>{
+     addToCart = async(id, book) => {
       await axios.patch(`${url}/cart/add/${id}`)
       this.getBooks()
     }
@@ -45,33 +63,36 @@ class App extends Component {
       this.getBooks()
     }
 
+////////////////////////////// ADD BOOK //////////////////////////////
 
-    async componentDidMount(){
+    createBook = async (book) => {
+      try {
+        await axios.post(`${url}/books`, book);
+        this.getBooks()
+      } catch(err) {
+        console.log(err)
+      }
       this.getBooks()
     }
-    
-    newBookHandler = (title, author, pages, price) => {
-      axios.post(url, {
-        title,
-        author,
-        pages,
-        price
-      })
-      .then(()=> {
-        this.getBooks()
-      })
-      .catch(err=> {
-        console.log(err);
-        
-      })
-    }
 
+////////////////////////////// DELETE BOOK //////////////////////////////
 
-    toggleAdmin = (e) => {
-      const admin = !this.state.admin
-      this.setState({admin})
-    }
+removeBook = async (id, book) => {
+  try {
+    await axios.put(`${url}/books/${id}`, book)
+    this.getLibrary()
+  } catch(err) {
+    console.log(err)
+  }
+}
 
+////////////////////////////// EDIT BOOK //////////////////////////////
+
+    // updateBook = async(id, book) => {
+    //   await axios.patch(`${url}/${id}`)
+    // }
+
+/////////////////////////// RENDER BOOKS ///////////////////////////
 
     getBooks = async () => {
       try {
@@ -86,6 +107,9 @@ class App extends Component {
       }
     }
 
+    async componentDidMount(){
+      this.getBooks()
+    }
 
   render() {    
     return (
@@ -96,7 +120,7 @@ class App extends Component {
           toggleCart={this.toggleCart} 
           searchString={this.state.searchString} 
           sortBy={this.props.sortBy} 
-          admin={this.state.admin}/> 
+          />        
            {
             this.state.inCart.length ?  
           <CartList
@@ -104,7 +128,13 @@ class App extends Component {
               toggleCart={ this.toggleCart }
             /> :  null
            }
-          <Footer />
+           { this.state.editing ?
+           <EditBook updateBook={this.updateBook}/>
+           : null
+           }
+          <Footer 
+            toggleAdmin= { this.toggleAdmin }
+          />
       </div>
     );
   }
