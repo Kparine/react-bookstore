@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 
-const inputField = {
-  padding: '20px'
-}
+
 
 export default class EditBook extends Component{
   constructor(props){
@@ -49,20 +47,20 @@ export default class EditBook extends Component{
       <form className="md-3" data-book={this.state.id} Submit={this.handleSubmit}>
         <div className="form-group">
         
-        <label htmlFor="title"><strong>Title</strong>
-            <input name="title" type="text" className="form-control" handleChange={this.handleChange} value={this.state.title} style={inputField} required />
+        <label htmlFor="title">
+            <input name="title" type="text" placeholder="Title..." style={{paddingLeft: '10px'}} className="form-control" handleChange={this.handleChange} value={this.state.title} required />
           </label>
 
-          <label htmlFor="author"><strong>Author</strong>
-            <input name="author" type="text" className="form-control" handleChange={this.handleChange} value={this.state.author} style={inputField} required />
+          <label htmlFor="author">
+            <input name="author" type="text" placeholder="Author..." className="form-control" handleChange={this.handleChange} value={this.state.author}  required />
           </label>
 
-          <label htmlFor="pages"><strong>Pages</strong>
-            <input name="pages" type="text" className="form-control" handleChange={this.handleChange} value={this.state.pages} style={inputField} required />
+          <label htmlFor="pages">
+            <input name="pages" type="text" placeholder="Pages..." className="form-control" handleChange={this.handleChange} value={this.state.pages} required />
           </label>
 
-          <label htmlFor="price"><strong>Price</strong>
-            <input name="price" type="text" className="form-control" handleChange={this.handleChange} value={this.state.price} style={inputField} required />
+          <label htmlFor="price">
+            <input name="price" type="text" placeholder="Price..." className="form-control" handleChange={this.handleChange} value={this.state.price} required />
           </label>
 
         <button type="submit" className="btn btn-outline-success">Submit</button>
