@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Books from './Books'
 
+
 export default class BookList extends Component {
 
   constructor(props) {
@@ -20,7 +21,7 @@ byColumns = (a, b) => {
   return a[this.props.sortBy] > b[this.props.sortBy] ? 1 : -1
 }
 
-//////////////////////// RENDER BOOKS ////////////////////////
+//////////////////////// RENDER FILTERED BOOKS ////////////////////////
 
 render() {
   const filteredBooks = this.props.books.filter(this.searchBook)
@@ -28,8 +29,10 @@ render() {
     <div>
       {
         filteredBooks.length !== 0 ?
-        filteredBooks.sort(this.byColumns).map(book => <Books key={book.id} toggleCart={this.props.toggleCart} {...book}/>) :
-        <div> Title does not exist...</div>
+        filteredBooks.sort(this.byColumns).map(book => <Books key={book.id} 
+        toggleCart={this.props.toggleCart} 
+        {...book}/>) :
+        <div> <strong>Book Does Not Exist...</strong></div>
         }
     </div>
     )}

@@ -4,7 +4,6 @@ import Footer from './Footer'
 import BookList from './BookList';
 import axios from 'axios'
 import CartList from './CartList';
-import Admin from './Admin'
 
 const url = process.env.REACT_APP_BASE_URL
 
@@ -16,7 +15,8 @@ class App extends Component {
       searchString: '',
       sortBy:'title',
       books: [],
-      inCart: []
+      inCart: [],
+      admin: false
     }
   }
     handleSearch = (e) => {
@@ -45,21 +45,32 @@ class App extends Component {
       this.getBooks()
     }
 
+
     async componentDidMount(){
       this.getBooks()
     }
     
-    // removeFromStore = async(id) => {
-    //   await axios.delete(`${url}/:id`)
-    // }
-    
-    // addToStore = async(id) => {
-    //   await axios.patch(`${url}/:id`)
-    // }
+    newBookHandler = (title, author, pages, price) => {
+      axios.post(url, {
+        title,
+        author,
+        pages,
+        price
+      })
+      .then(()=> {
+        this.getBooks()
+      })
+      .catch(err=> {
+        console.log(err);
+        
+      })
+    }
 
-    // updateStore = async(id) => {
-    //   await axios.patch(`${url}/:id`)
-    // }
+
+    toggleAdmin = (e) => {
+      const admin = !this.state.admin
+      this.setState({admin})
+    }
 
 
     getBooks = async () => {
@@ -80,15 +91,19 @@ class App extends Component {
     return (
       <div className="App">
         <NavHeader handleSearch={this.handleSearch} value={this.state.searchString}  />
-          <BookList books={this.state.books} toggleCart={this.toggleCart} searchString={this.state.searchString} sortBy={this.props.sortBy}/> 
+          <BookList 
+          books={this.state.books} 
+          toggleCart={this.toggleCart} 
+          searchString={this.state.searchString} 
+          sortBy={this.props.sortBy} 
+          admin={this.state.admin}/> 
            {
             this.state.inCart.length ?  
-            <CartList
+          <CartList
               inCart={ this.state.inCart }
               toggleCart={ this.toggleCart }
             /> :  null
            }
-            <Admin toggleAdmin={this.toggleAdmin} />  
           <Footer />
       </div>
     );

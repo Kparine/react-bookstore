@@ -8,7 +8,7 @@ const rowStyle = {
 };
 
 
-function Books ({id, title, author, pages, price ,inCart, toggleCart}) {
+function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin, deleteAdmin}) {
   return (
   <div className="list-group-item">
     <div className="row" style={rowStyle}>
@@ -16,12 +16,14 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart}) {
       <div className="col-md-2">{author}</div>
       <div className="col-md-2">{pages} pages</div>
       <div className="col-md-2">{"$" + Number(price).toFixed(2)}</div>
-
       <button className="col-md-2 btn add-button" style={btnStyle} onClick={() => toggleCart(id)}>
       {  inCart ?
         <span><strong>🛒  </strong> Remove from Cart </span> :
         <span><strong>🛒  </strong>  Add to Cart</span> 
       }
+         {/* toggleAdmin ? */}
+        {/* <button className="col-md-1 btn remove-button" style={btnStyle} onclick={()=> editAdmin(id)}>Edit</button> :
+        <button className="col-md-1 btn remove-button" style={btnStyle} onclick={()=> deleteAdmin(id)}>Delete</button> */}
       </button>
     </div>
   </div>
