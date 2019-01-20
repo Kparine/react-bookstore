@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 
-
 export default class EditBook extends Component{
   constructor(props){
     super(props)
@@ -12,7 +11,8 @@ export default class EditBook extends Component{
       title: this.props.title,
       author: this.props.author,
       pages: this.props.pages,
-      price: this.props.price
+      price: this.props.price,
+      editing: false
     }
   }
 
@@ -40,11 +40,9 @@ export default class EditBook extends Component{
     this.props.updateBook(this.state.id, book)
   }
 
-
-
   render() {
     return (
-      <form className="md-3" data-book={this.state.id} Submit={this.handleSubmit}>
+      <form className="md-3" data-book={this.state.id} onSubmit={this.handleSubmit}>
         <div className="form-group">
         
         <label htmlFor="title">

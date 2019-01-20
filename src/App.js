@@ -17,8 +17,6 @@ class App extends Component {
       sortBy:'title',
       books: [],
       inCart: [],
-      admin: false,
-      editing: true
 
     }
   }
@@ -28,11 +26,12 @@ class App extends Component {
       })
     }
 
+
 ////////////////////////////// TOGGLE ADMIN //////////////////////////////
 
     toggleAdmin = async(id) => {
       const book = this.state.books.find(book => book.id === id)
-
+    
       if (this.state.editing){
           return true 
        } else {
@@ -88,9 +87,9 @@ removeBook = async (id, book) => {
 
 ////////////////////////////// EDIT BOOK //////////////////////////////
 
-    // updateBook = async(id, book) => {
-    //   await axios.patch(`${url}/${id}`)
-    // }
+    updateBook = async(id, book) => {
+      await axios.patch(`${url}/${id}`)
+    }
 
 /////////////////////////// RENDER BOOKS ///////////////////////////
 

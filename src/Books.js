@@ -1,11 +1,19 @@
 import React from 'react'
 
+
+
+
+
 const btnStyle = {
   background: '#7ea8ea'
-};
+}
 const rowStyle = {
   fontFamily: 'sans-serif'
-};
+}
+
+
+
+
 
 
 function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin, deleteAdmin}) {
@@ -19,10 +27,14 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin,
       <div className="col-md-2">{"$" + Number(price).toFixed(2)}</div>
       <button className="col-md-2 btn add-button" style={btnStyle} onClick={() => toggleCart(id)}>
       {  inCart ?
-        <span><strong>🛒  </strong> Remove from Cart </span> :
-        <span><strong>🛒  </strong>  Add to Cart</span> 
+        <span role='img' aria-label='cart'><strong>🛒  </strong> Remove from Cart </span> :
+        <span role='img' aria-label='cart'><strong>🛒  </strong>  Add to Cart</span> 
       }
       </button>
+
+      <button className="col-md-1 btn remove-button" onClick={()=> editAdmin(id)}>Edit</button>
+      <button className="col-md-1 btn remove-button" onClick={()=> deleteAdmin(id)}>Delete</button>
+
     </div>
   </div>
   )
