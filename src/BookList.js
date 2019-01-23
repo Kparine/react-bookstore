@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Books from './Books'
 
+const btnStyle = {
+  background: '#7ea8ea'
+}
 
 export default class BookList extends Component {
 
   constructor(props) {
     super(props)
   }
-
-//////////////////////// SEARCH ALL BOOKS ////////////////////////
 
 searchBook = (ele) => {
   const normTitle = ele.title.toLowerCase()
@@ -20,8 +21,6 @@ searchBook = (ele) => {
 byColumns = (a, b) => {
   return a[this.props.sortBy] > b[this.props.sortBy] ? 1 : -1
 }
-
-//////////////////////// RENDER FILTERED BOOKS ////////////////////////
 
 render() {
   const filteredBooks = this.props.books.filter(this.searchBook)
@@ -37,4 +36,5 @@ render() {
     </div>
     )}
 }
+
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import NavHeader from './NavHeader';
-import Footer from './Footer'
 import BookList from './BookList';
+import Footer from './Footer'
 import axios from 'axios'
 import CartList from './CartList';
-import EditBook from './Admin'
+import NewBook from './Admin'
 
 const url = process.env.REACT_APP_BASE_URL
 
@@ -16,28 +16,24 @@ class App extends Component {
       searchString: '',
       sortBy:'title',
       books: [],
-      inCart: [],
-
+      inCart: []
     }
   }
-    handleSearch = (e) => {
-      this.setState({
-        searchString: e.target.value
-      })
-    }
-
-////////////////////////////// TOGGLE ADMIN //////////////////////////////
+    
+    
+  handleSearch = (e) => {
+    this.setState({
+      searchString: e.target.value
+    })
+  }
 
     toggleAdmin = async(id) => {
-      const book = this.state.books.find(book => book.id === id)
-    
-      if (this.state.editing){
-          return true 
-       } else {
-          return false
-        }
-      }
-  
+      this.setState({
+        editing: true
+      })    
+    }
+
+
 ////////////////////////////// TOGGLE CART //////////////////////////////
 
     toggleCart = async(id) => {
@@ -104,9 +100,9 @@ removeBook = async (id, book) => {
       }
     }
 
-    async componentDidMount(){
-      this.getBooks()
-    }
+    componentDidMount() {
+    this.getBooks()
+  }
 
   render() {    
     return (
@@ -125,8 +121,8 @@ removeBook = async (id, book) => {
               toggleCart={ this.toggleCart }
             /> :  null
            }
-           { this.state.editing ?
-           <EditBook updateBook={this.updateBook}/>
+              { this.state.editing ?
+           <NewBook onClick={this.handleNewBook} updateBook={this.updateBook}/>
            : null
            }
           <Footer 
