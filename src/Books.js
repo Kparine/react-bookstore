@@ -1,20 +1,11 @@
 import React from 'react'
 
-
-
-
-
 const btnStyle = {
   background: '#7ea8ea'
 }
 const rowStyle = {
   fontFamily: 'sans-serif'
 }
-
-
-
-
-
 
 function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin, deleteAdmin}) {
   return (
@@ -31,10 +22,11 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin,
         <span role='img' aria-label='cart'><strong>🛒  </strong>  Add to Cart</span> 
       }
       </button>
-
+      {/* { editing ?
       <button className="col-md-1 btn remove-button" onClick={()=> editAdmin(id)}>Edit</button>
       <button className="col-md-1 btn remove-button" onClick={()=> deleteAdmin(id)}>Delete</button>
-
+      : null
+      } */}
     </div>
   </div>
   )

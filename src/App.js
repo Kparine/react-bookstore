@@ -26,7 +26,6 @@ class App extends Component {
       })
     }
 
-
 ////////////////////////////// TOGGLE ADMIN //////////////////////////////
 
     toggleAdmin = async(id) => {
@@ -40,7 +39,6 @@ class App extends Component {
       }
   
 ////////////////////////////// TOGGLE CART //////////////////////////////
-
 
     toggleCart = async(id) => {
       const book = this.state.books.find(book => book.id === id)
@@ -64,7 +62,7 @@ class App extends Component {
 
 ////////////////////////////// ADD BOOK //////////////////////////////
 
-    createBook = async (book) => {
+    Book = async (book) => {
       try {
         await axios.post(`${url}/books`, book);
         this.getBooks()
@@ -138,5 +136,4 @@ removeBook = async (id, book) => {
     );
   }
 }
-
 export default App;
