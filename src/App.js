@@ -4,7 +4,8 @@ import BookList from './BookList';
 import Footer from './Footer'
 import axios from 'axios'
 import CartList from './CartList';
-import NewBook from './Admin'
+import NewBook from './NewBook'
+import EditBook from './EditBook'
 
 const url = process.env.REACT_APP_BASE_URL
 
@@ -70,23 +71,19 @@ class App extends Component {
       }
       this.getBooks()
     }
+/////////////////////////// REMOVE BOOKS ///////////////////////////
 
-////////////////////////////// DELETE BOOK //////////////////////////////
+  removeBook = async(id) => {
+    try {
+      const res = await axios.delete(`${process.env.REACT_APP_BASE_URL}/${id}`)
 
-removeBook = async (id, book) => {
-  try {
-    await axios.put(`${url}/books/${id}`, book)
-    this.getLibrary()
-  } catch(err) {
-    console.log(err)
-  }
-}
-
-////////////////////////////// EDIT BOOK //////////////////////////////
-
-    updateBook = async(id, book) => {
-      await axios.patch(`${url}/books/${id}`)
+        this.setState({
+            books: this.state.books.filter(book => book.id !== res.data.id)
+        })
+    } catch(err){
+        console.log(err)
     }
+  }
 
 /////////////////////////// RENDER BOOKS ///////////////////////////
 
@@ -103,6 +100,7 @@ removeBook = async (id, book) => {
       }
     }
 
+
     componentDidMount() {
     this.getBooks()
   }
@@ -116,7 +114,9 @@ removeBook = async (id, book) => {
           toggleCart={this.toggleCart} 
           searchString={this.state.searchString} 
           sortBy={this.props.sortBy}
-          editing={this.state.editing} 
+          editing={this.state.editing}
+          removeBook={this.removeBook}
+          getBook={this.getBooks} 
           />        
            {
             this.state.inCart.length ?  
@@ -126,8 +126,9 @@ removeBook = async (id, book) => {
             /> :  null
            }
               { this.state.editing ?
-           <NewBook onClick={this.handleNewBook} updateBook={this.updateBook}/>
-           : null
+           <EditBook />
+           :<NewBook onClick={this.handleNewBook} createBook={this.createBook}/>
+
            }
           <Footer editing={this.state.editing}
             toggleAdmin= { this.toggleAdmin }

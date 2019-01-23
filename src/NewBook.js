@@ -7,7 +7,6 @@ export default class NewBook extends Component{
   constructor(props){
     super(props)
 
-
     this.state = {
       id: this.props.id,
       title: this.props.title,
@@ -17,15 +16,16 @@ export default class NewBook extends Component{
     }
   }
 
-  handleNewBook = (title, author, pages, price) => {
+  createBook = (e) => {
+    e.preventDefault()    
     axios.post(url, {
-      title,
-      author,
-      pages,
-      price
+     title: this.state.title,
+     author: this.state.author,
+     pages: this.state.pages,
+     price: this.state.price
     })
       .then(() => {
-        this.getBooks()
+        this.props.getBooks()
       })
       .catch(error => {
         console.log(error)
@@ -37,19 +37,13 @@ export default class NewBook extends Component{
       [e.target.name]: e.target.value
     })
   }
-
-handleNewSubmit = (e) => {
-  e.preventDefault()
-
   
-}
-  
-  render() {
+  render() {    
     return (
-      <form className="md-3" data-book={this.state.id} onSubmit={this.handleNewBook}>
+      <form className="md-3" data-book={this.state.id} onSubmit={this.createBook}>
         <div className="form-group">
-        
-        <label htmlFor="title">
+        <br></br>
+          <label htmlFor="title"><strong>Add A New Book...</strong>
             <input name="title" type="text" placeholder="Title..." style={{paddingLeft: '10px'}} className="form-control" handlechange={this.handleChange} value={this.state.title} required />
           </label>
 
@@ -65,7 +59,7 @@ handleNewSubmit = (e) => {
             <input name="price" type="text" placeholder="Price..." className="form-control" handlechange={this.handleChange} value={this.state.price} required />
           </label>        
           
-          <button type="submit" className="btn btn-outline-success" onClick={this.handleNewBook}>Submit</button>
+          <button type="submit" className="btn btn-outline-success">Submit</button>
         </div>
 
       </form>

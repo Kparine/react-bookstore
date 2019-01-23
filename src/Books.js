@@ -1,4 +1,5 @@
 import React from 'react'
+import removeBook from './EditBook'
 
 const btnStyle = {
   background: '#7ea8ea'
@@ -14,11 +15,7 @@ const rowStyle = {
 }
 
 
-
-
-
-function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin, deleteAdmin, editing, toggleAdmin}) {
-  console.log(editing);
+function Books ({id, title, author, pages, price ,inCart, toggleCart, removeBook, editing, updateBook, toggleAdmin, getBooks}) {
   const AddCart = inCart ? 'Remove from Cart' : 'Add to Cart' 
   
   return (
@@ -35,9 +32,9 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin,
       </button>
       :
       <div>
-        <button className=" btn remove-button" style={editStyle} onClick={()=> editAdmin(id)}>✏️ Edit</button>
+        <button className="btn" style={editStyle} onClick={()=> updateBook(id)}>✎ Edit</button>
         <span>  </span>
-        <button className="btn remove-button" style={delStyle} onClick={()=> deleteAdmin(id)}>🗑️ Delete</button>
+        <button className="btn" style={delStyle} onClick={()=> removeBook(id)}>🗑 Delete</button>
       </div>
       }
     </div>

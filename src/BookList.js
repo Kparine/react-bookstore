@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Books from './Books'
 
-const btnStyle = {
-  background: '#7ea8ea'
-}
 
 export default class BookList extends Component {
   constructor(props) {
@@ -11,6 +8,7 @@ export default class BookList extends Component {
   }
 
 searchBook = (ele) => {
+console.log(ele);
 
   const normTitle = ele.title.toLowerCase()
   const normSearchString = this.props.searchString.toLowerCase()
@@ -28,9 +26,14 @@ render() {
     <div>
       {
         filteredBooks.length !== 0 ?
-        filteredBooks.sort(this.byColumns).map(book => <Books key={book.id} 
+        filteredBooks.sort(this.byColumns).map(book => <Books 
+        key={book.id} 
         toggleCart={this.props.toggleCart}
-        editing={this.props.editing} 
+        editing={this.props.editing}
+        updateBook={this.props.updateBook}
+        createBook={this.props.createBook}
+        removeBook={this.props.removeBook}
+        getBooks={this.props.getBooks}
         {...book}/>) :
         <div> <strong>Book Does Not Exist...</strong></div>
         }
