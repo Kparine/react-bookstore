@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
 
-const url = process.env.REACT_APP_BASE_URL
-
-export default class NewBook extends Component{
-  constructor(props){
+  
+class EditBook extends Component {
+  constructor(props) {
     super(props)
-
-
     this.state = {
       id: this.props.id,
       title: this.props.title,
@@ -15,38 +11,31 @@ export default class NewBook extends Component{
       pages: this.props.pages,
       price: this.props.price
     }
+  } 
+
+  handleEditSubmit = (e) => {
+    e.preventDefault()
+
+    let book = {
+      title: this.state.title,
+      author: this.state.author,
+      pages: this.state.pages,
+      price: this.state.price
+    }
+
+    this.setState = {
+      title: '',
+      author: '',
+      pages: '',
+      price: ''
+    }
+    this.props.updateBook(this.state.id, book)
   }
 
-  handleNewBook = (title, author, pages, price) => {
-    axios.post(url, {
-      title,
-      author,
-      pages,
-      price
-    })
-      .then(() => {
-        this.getBooks()
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-handleNewSubmit = (e) => {
-  e.preventDefault()
-
-  
-}
-  
-  render() {
+render() {
     return (
-      <form className="md-3" data-book={this.state.id} onSubmit={this.handleNewBook}>
+      <form className="md-3" data-book={this.state.id} onSubmit={this.handleEditBook}>
         <div className="form-group">
         
         <label htmlFor="title">

@@ -16,10 +16,11 @@ class App extends Component {
       searchString: '',
       sortBy:'title',
       books: [],
-      inCart: []
+      inCart: [],
+      editing: false,
+      Admin: false
     }
   }
-    
     
   handleSearch = (e) => {
     this.setState({
@@ -29,9 +30,8 @@ class App extends Component {
 
     toggleAdmin = () => {
       this.setState({
-        editing: true
+        editing: !this.state.editing
       })
-      this.getBooks()    
     }
 
  
@@ -85,7 +85,7 @@ removeBook = async (id, book) => {
 ////////////////////////////// EDIT BOOK //////////////////////////////
 
     updateBook = async(id, book) => {
-      await axios.patch(`${url}/${id}`)
+      await axios.patch(`${url}/books/${id}`)
     }
 
 /////////////////////////// RENDER BOOKS ///////////////////////////
@@ -115,7 +115,8 @@ removeBook = async (id, book) => {
           books={this.state.books} 
           toggleCart={this.toggleCart} 
           searchString={this.state.searchString} 
-          sortBy={this.props.sortBy} 
+          sortBy={this.props.sortBy}
+          editing={this.state.editing} 
           />        
            {
             this.state.inCart.length ?  
@@ -128,7 +129,7 @@ removeBook = async (id, book) => {
            <NewBook onClick={this.handleNewBook} updateBook={this.updateBook}/>
            : null
            }
-          <Footer 
+          <Footer editing={this.state.editing}
             toggleAdmin= { this.toggleAdmin }
           />
       </div>
