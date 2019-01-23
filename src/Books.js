@@ -7,7 +7,7 @@ const rowStyle = {
   fontFamily: 'sans-serif'
 }
 
-function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin, deleteAdmin}) {
+function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin, editing, deleteAdmin}) {
   return (
   <div className="list-group-item">
     <div className="row" style={rowStyle}>
@@ -22,11 +22,13 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, editAdmin,
         <span role='img' aria-label='cart'><strong>🛒  </strong>  Add to Cart</span> 
       }
       </button>
-      {/* { editing ?
-      <button className="col-md-1 btn remove-button" onClick={()=> editAdmin(id)}>Edit</button>
-      <button className="col-md-1 btn remove-button" onClick={()=> deleteAdmin(id)}>Delete</button>
+      { editing ?
+      <div>
+        <button className="col-md-1 btn remove-button" onClick={()=> editAdmin(id)}>Edit</button>
+        <button className="col-md-1 btn remove-button" onClick={()=> deleteAdmin(id)}>Delete</button>
+      </div>
       : null
-      } */}
+      }
     </div>
   </div>
   )

@@ -13,9 +13,10 @@ export default class NewBook extends Component{
       title: this.props.title,
       author: this.props.author,
       pages: this.props.pages,
-      price: this.props.price,
+      price: this.props.price
     }
   }
+
 
   handleNewBook = (title, author, pages, price) => {
     axios.post(url, {
@@ -77,10 +78,9 @@ export default class NewBook extends Component{
 
           <label htmlFor="price">
             <input name="price" type="text" placeholder="Price..." className="form-control" handlechange={this.handleChange} value={this.state.price} required />
-          </label>
-
-        <button type="submit" className="btn btn-outline-success" onClick={this.handleNewBook}>Submit</button>
-        <button type="submit" className="btn btn-outline-danger">Cancel</button>
+          </label>        
+          
+          <button type="submit" className="btn btn-outline-success" onClick={this.handleNewBook}>Submit</button>
         </div>
 
       </form>

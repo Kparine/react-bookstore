@@ -27,11 +27,14 @@ class App extends Component {
     })
   }
 
-    toggleAdmin = async(id) => {
+    toggleAdmin = () => {
       this.setState({
         editing: true
-      })    
+      })
+      this.getBooks()    
     }
+
+ 
 
 
 ////////////////////////////// TOGGLE CART //////////////////////////////
