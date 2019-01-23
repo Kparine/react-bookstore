@@ -15,7 +15,7 @@ const rowStyle = {
 }
 
 
-function Books ({id, title, author, pages, price ,inCart, toggleCart, removeBook, editing, updateBook, toggleAdmin, getBooks}) {
+function Books ({id, title, author, pages, price ,inCart, toggleCart, removeBook, editing, updateBook, toggleAdmin, getBooks, handleCreateBook}) {
   const AddCart = inCart ? 'Remove from Cart' : 'Add to Cart' 
   
   return (

@@ -8,7 +8,6 @@ export default class EditBook extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: this.props.id,
       title: this.props.title,
       author: this.props.author,
       pages: this.props.pages,

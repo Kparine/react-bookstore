@@ -8,20 +8,21 @@ export default class NewBook extends Component{
     super(props)
 
     this.state = {
-      id: this.props.id,
-      title: this.props.title,
-      author: this.props.author,
-      pages: this.props.pages,
-      price: this.props.price
+      title: '',
+      author: '',
+      pages: 0,
+      price: 0
     }
   }
 
-  createBook = (e) => {
-    e.preventDefault()    
+  handleCreateBook = (e) => {
+    
+    e.preventDefault()   
+     
     axios.post(url, {
      title: this.state.title,
      author: this.state.author,
-     pages: this.state.pages,
+     pages: parseInt(this.state.pages),
      price: this.state.price
     })
       .then(() => {
@@ -32,31 +33,33 @@ export default class NewBook extends Component{
       })
   }
 
-  handleChange = (e) => {
-    this.setState({
+  handleChange = (e) => {   
+    console.log(this.state);
+     
+    this.setState({...this.state,
       [e.target.name]: e.target.value
     })
   }
   
   render() {    
     return (
-      <form className="md-3" data-book={this.state.id} onSubmit={this.createBook}>
+      <form className="md-3" data-book={this.state.id} onSubmit={this.handleCreateBook}>
         <div className="form-group">
         <br></br>
           <label htmlFor="title"><strong>Add A New Book...</strong>
-            <input name="title" type="text" placeholder="Title..." style={{paddingLeft: '10px'}} className="form-control" handlechange={this.handleChange} value={this.state.title} required />
+            <input name="title" type="text" placeholder="Title..." style={{paddingLeft: '10px'}} className="form-control" onChange={this.handleChange} value={this.state.title} required />
           </label>
 
           <label htmlFor="author">
-            <input name="author" type="text" placeholder="Author..." className="form-control" handlechange={this.handleChange} value={this.state.author}  required />
+            <input name="author" type="text" placeholder="Author..." className="form-control" onChange={this.handleChange} value={this.state.author}  required />
           </label>
 
           <label htmlFor="pages">
-            <input name="pages" type="text" placeholder="Pages..." className="form-control" handlechange={this.handleChange} value={this.state.pages} required />
+            <input name="pages" type="number" placeholder="Pages..." className="form-control" onChange={this.handleChange} value={this.state.pages} required />
           </label>
 
           <label htmlFor="price">
-            <input name="price" type="text" placeholder="Price..." className="form-control" handlechange={this.handleChange} value={this.state.price} required />
+            <input name="price" type="number" placeholder="Price..." className="form-control" onChange={this.handleChange} value={this.state.price} required />
           </label>        
           
           <button type="submit" className="btn btn-outline-success">Submit</button>

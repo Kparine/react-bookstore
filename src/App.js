@@ -90,9 +90,13 @@ class App extends Component {
     getBooks = async () => {
       try {
         const response = await axios.get(url)
+        console.log(response.data);
         this.setState({
+          
+          
           books: response.data,
           inCart: response.data.filter(book => book.inCart === true)
+
         })
       } 
       catch(err){
@@ -116,7 +120,6 @@ class App extends Component {
           sortBy={this.props.sortBy}
           editing={this.state.editing}
           removeBook={this.removeBook}
-          getBook={this.getBooks} 
           />        
            {
             this.state.inCart.length ?  
@@ -127,7 +130,7 @@ class App extends Component {
            }
               { this.state.editing ?
            <EditBook />
-           :<NewBook onClick={this.handleNewBook} createBook={this.createBook}/>
+           :<NewBook handleCreateBook={this.handleCreateBook} getBooks={this.getBooks}/>
 
            }
           <Footer editing={this.state.editing}

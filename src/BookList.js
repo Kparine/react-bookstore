@@ -8,7 +8,7 @@ export default class BookList extends Component {
   }
 
 searchBook = (ele) => {
-console.log(ele);
+console.log(ele.title);
 
   const normTitle = ele.title.toLowerCase()
   const normSearchString = this.props.searchString.toLowerCase()
