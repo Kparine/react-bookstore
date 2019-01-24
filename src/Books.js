@@ -1,5 +1,5 @@
 import React from 'react'
-import removeBook from './EditBook'
+import { removeBook, updateBook }  from './EditBook'
 
 const btnStyle = {
   background: '#7ea8ea'
@@ -25,7 +25,7 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, removeBook
       <div className="col-md-3">{title}</div>
       <div className="col-md-2">{author}</div>
       <div className="col-md-2">{pages} pages</div>
-      <div className="col-md-2">{"$" + Number(price).toFixed(2)}</div>
+      <div className="col-md-2">{price}</div>
       {  !editing ?
       <button className="col-md-2 btn add-button" style={btnStyle} onClick={() => toggleCart(id)}>
         <span role='img' aria-label='cart'><strong>🛒  </strong>{AddCart}</span> 

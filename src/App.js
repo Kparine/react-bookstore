@@ -6,6 +6,7 @@ import axios from 'axios'
 import CartList from './CartList';
 import NewBook from './NewBook'
 import EditBook from './EditBook'
+import handleUpdateBook from './EditBook'
 
 const url = process.env.REACT_APP_BASE_URL
 
@@ -92,11 +93,8 @@ class App extends Component {
         const response = await axios.get(url)
         console.log(response.data);
         this.setState({
-          
-          
           books: response.data,
-          inCart: response.data.filter(book => book.inCart === true)
-
+          inCart: response.data.filter(book => book.inCart === true),
         })
       } 
       catch(err){
@@ -120,6 +118,7 @@ class App extends Component {
           sortBy={this.props.sortBy}
           editing={this.state.editing}
           removeBook={this.removeBook}
+          updateBook={this.updateBook}
           />        
            {
             this.state.inCart.length ?  
@@ -129,7 +128,7 @@ class App extends Component {
             /> :  null
            }
               { this.state.editing ?
-           <EditBook />
+           <EditBook handleUpdateBook={handleUpdateBook} getBooks={this.getBooks}/>
            :<NewBook handleCreateBook={this.handleCreateBook} getBooks={this.getBooks}/>
 
            }

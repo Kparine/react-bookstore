@@ -6,7 +6,7 @@ function CartItem({ id, author, title, price, toggleCart }){
       <div className="row">
         <div className="col-md-2">{title}</div>
         <div className="col-md-2">{author}</div>
-        <div className="col-md-2">{"$" + Number(price).toFixed(2)}</div>
+        <div className="col-md-2">{price}</div>
         <button className="btn" onClick={()=> toggleCart(id)}>
         </button>
       </div>
