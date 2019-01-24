@@ -19,7 +19,9 @@ byColumns = (a, b) => {
 }
 
 render() {
-  const filteredBooks = this.props.books.filter(this.searchBook)
+  const { books, searchString, toggleCart, editing, getBooks, editBook, createBook, removeBook, showEditBook } = this.props
+  const filteredBooks = searchString ? books.filter(this.searchBook): books
+  
    return (
     <div>
       {
@@ -28,12 +30,13 @@ render() {
         
         <Books 
         key={book.id} 
-        toggleCart={this.props.toggleCart}
-        editing={this.props.editing}
-        createBook={this.props.createBook}
-        removeBook={this.props.removeBook}
-        editBook={this.props.editBook}
-        getBooks={this.props.getBooks}
+        toggleCart={toggleCart}
+        editing={editing}
+        createBook={createBook}
+        removeBook={removeBook}
+        editBook={editBook}
+        getBooks={getBooks}
+        showEditBook={showEditBook}
         {...book}/>
         ) 
         :

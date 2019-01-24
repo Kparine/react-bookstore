@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavHeader from './NavHeader';
 import BookList from './BookList';
+import Books from './Books';
 import Footer from './Footer'
 import axios from 'axios'
 import CartList from './CartList';
@@ -21,7 +22,9 @@ class App extends Component {
       sortBy:'title',      
       inCart: [],
       editing: false,
-      editBook: false,
+      editBook: null,
+
+      // editBook: false,
       Admin: false
     }
   }
@@ -34,8 +37,10 @@ class App extends Component {
 
     toggleAdmin = () => {
       this.setState({
-        editing: !this.state.editing
+        editing: !this.state.editing,
+        editBook: !this.state.editing ? this.state.editBook : null
       })
+      this.getBooks()
     }
 
 ////////////////////////////// TOGGLE CART //////////////////////////////
@@ -88,17 +93,17 @@ class App extends Component {
 
 /////////////////////////// EDIT BOOKS ///////////////////////////
 
- editBook = (id) => {
-    let editing = this.state.books.filter(book => book.id === id)
+ showEditBook = (id) => {
+    let editing = this.state.books.find(book => book.id === id)
+    // console.log(editing);
     this.setState({
-      books: [...editing],
-      editBook: true
+      editBook: editing
     })
   }  
 
 /////////////////////////// RENDER BOOKS ///////////////////////////
 
-     getBooks = async () => {
+  getBooks = async () => {
     try {
       const response = await axios.get(url)
       this.setState({
@@ -122,16 +127,20 @@ class App extends Component {
     return (
       <div className="App">
         <NavHeader handleSearch={this.handleSearch} value={this.state.searchString}  />
-          <BookList 
-          books={this.state.books} 
-          toggleCart={this.toggleCart} 
-          searchString={this.state.searchString} 
-          sortBy={this.props.sortBy}
-          editing={this.state.editing}
-          editBook={this.editBook}
-          removeBook={this.removeBook}
-          updateBook={this.updateBook}
-          />        
+          {
+            this.state.editBook ? <Books {...this.state.editBook} editing={this.state.editing}/>
+              :<BookList 
+                books={this.state.books} 
+                toggleCart={this.toggleCart} 
+                searchString={this.state.searchString} 
+                sortBy={this.props.sortBy}
+                editing={this.state.editing}
+                editBook={this.editBook}
+                removeBook={this.removeBook}
+                updateBook={this.updateBook}
+                showEditBook={this.showEditBook}
+              />
+          } 
            {
             this.state.inCart.length ?  
           <CartList
@@ -140,10 +149,10 @@ class App extends Component {
             /> :  null
            }
           { 
-               this.state.editing ?
-              <EditBook
-              editBook={this.editBook}
-              />           
+               this.state.editBook ?
+                <EditBook
+                showEditBook={this.showEditBook} {...this.state.editBook}
+                />           
               :
               <NewBook addBook={this.addBook} getBooks={this.getBooks}/>
               

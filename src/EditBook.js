@@ -7,16 +7,18 @@ const url = process.env.REACT_APP_BASE_URL
 export default class EditBook extends Component {
   constructor(props) {
     super(props)
+    console.log(props);
+    
     this.state = {
-      title: this.props.title,
-      author: this.props.author,
-      pages: this.props.pages,
-      price: this.props.price
+      title: props.title,
+      author: props.author,
+      pages: props.pages,
+      price: props.price,
     }
-  } 
+  }
 
   handleUpdateBook = async(id, book) => {
-    await axios.patch(`${url}/books/${id}`)
+    await axios.patch(`${url}/${id}`)
      .then(() => {
         this.props.getBooks()
       })
@@ -41,7 +43,14 @@ export default class EditBook extends Component {
       pages: '',
       price: ''
     }
-    this.props.editBook(this.state.id, book)
+    this.handleUpdateBook(this.state.id, book)
+  }
+
+  handleChange = (e) => {   
+    
+    this.setState({...this.state,
+      [e.target.name]: e.target.value
+    })
   }
     
 render() {

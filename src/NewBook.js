@@ -11,7 +11,7 @@ export default class NewBook extends Component{
       title: '',
       author: '',
       pages: 0,
-      price: ''
+      price: 0
     }
   }
 
@@ -22,7 +22,7 @@ export default class NewBook extends Component{
      title: this.state.title,
      author: this.state.author,
      pages: parseInt(this.state.pages),
-     price: this.state.price
+     price: parseInt(this.state.price)
     })
       .then(() => {
         this.props.getBooks()
@@ -33,14 +33,15 @@ export default class NewBook extends Component{
   }
 
   handleChange = (e) => {   
-    console.log(this.state);
      
     this.setState({...this.state,
       [e.target.name]: e.target.value
     })
   }
-  
-  render() {    
+
+
+  render() { 
+
     return (
       <form className="md-3" data-book={this.state.id} onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -58,7 +59,7 @@ export default class NewBook extends Component{
           </label>
 
           <label htmlFor="price">
-            <input name="price" type="text" placeholder="Price..." className="form-control" onChange={this.handleChange} value={this.state.price} required />
+            <input name="price" type="number" placeholder="Price..." className="form-control" onChange={this.handleChange} value={this.state.price} required />
           </label>        
           
           <button type="submit" className="btn btn-outline-success">Submit</button>
