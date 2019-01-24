@@ -11,11 +11,11 @@ export default class NewBook extends Component{
       title: '',
       author: '',
       pages: 0,
-      price: 0
+      price: ''
     }
   }
 
-  handleCreateBook = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault()   
      
     axios.post(url, {
@@ -42,7 +42,7 @@ export default class NewBook extends Component{
   
   render() {    
     return (
-      <form className="md-3" data-book={this.state.id} onSubmit={this.handleCreateBook}>
+      <form className="md-3" data-book={this.state.id} onSubmit={this.handleSubmit}>
         <div className="form-group">
         <br></br>
           <label htmlFor="title"><strong>Add A New Book...</strong>
@@ -58,7 +58,7 @@ export default class NewBook extends Component{
           </label>
 
           <label htmlFor="price">
-            <input name="price" type="price" placeholder="Price..." className="form-control" onChange={this.handleChange} value={this.state.price} required />
+            <input name="price" type="text" placeholder="Price..." className="form-control" onChange={this.handleChange} value={this.state.price} required />
           </label>        
           
           <button type="submit" className="btn btn-outline-success">Submit</button>

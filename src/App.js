@@ -6,7 +6,6 @@ import axios from 'axios'
 import CartList from './CartList';
 import NewBook from './NewBook'
 import EditBook from './EditBook'
-import handleUpdateBook from './EditBook'
 
 const url = process.env.REACT_APP_BASE_URL
 
@@ -15,11 +14,14 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state= {
+      books: [
+        { id: 0, title: 'Steve', author: 'Author 1', pages: '200', price: 0, inCart: false },
+      ],
       searchString: '',
-      sortBy:'title',
-      books: [],
+      sortBy:'title',      
       inCart: [],
       editing: false,
+      editBook: false,
       Admin: false
     }
   }
@@ -36,9 +38,6 @@ class App extends Component {
       })
     }
 
- 
-
-
 ////////////////////////////// TOGGLE CART //////////////////////////////
 
     toggleCart = async(id) => {
@@ -50,8 +49,10 @@ class App extends Component {
         this.addToCart(id, book)
       }
     }
+
      addToCart = async(id, book) => {
       await axios.patch(`${url}/cart/add/${id}`)
+      
       this.getBooks()
     }
 
@@ -63,15 +64,14 @@ class App extends Component {
 
 ////////////////////////////// ADD BOOK //////////////////////////////
 
-    Book = async (book) => {
-      try {
-        await axios.post(`${url}/books`, book);
-        this.getBooks()
-      } catch(err) {
-        console.log(err)
-      }
+   addBook = async (book) => {
+    try {
+      await axios.post(url, book)
       this.getBooks()
+    } catch (err) {
+      console.log(err)
     }
+  }
 /////////////////////////// REMOVE BOOKS ///////////////////////////
 
   removeBook = async(id) => {
@@ -79,29 +79,40 @@ class App extends Component {
       const res = await axios.delete(`${process.env.REACT_APP_BASE_URL}/${id}`)
 
         this.setState({
-            books: this.state.books.filter(book => book.id !== res.data.id)
+          books: this.state.books.filter(book => book.id !== res.data.id)
         })
     } catch(err){
         console.log(err)
     }
   }
 
+/////////////////////////// EDIT BOOKS ///////////////////////////
+
+ editBook = (id) => {
+    let editing = this.state.books.filter(book => book.id === id)
+    this.setState({
+      books: [...editing],
+      editBook: true
+    })
+  }  
+
 /////////////////////////// RENDER BOOKS ///////////////////////////
 
-    getBooks = async () => {
-      try {
-        const response = await axios.get(url)
-        console.log(response.data);
-        this.setState({
-          books: response.data,
-          inCart: response.data.filter(book => book.inCart === true),
-        })
-      } 
-      catch(err){
-        console.log(err)
-      }
-    }
+     getBooks = async () => {
+    try {
+      const response = await axios.get(url)
+      this.setState({
+        books: response.data,
+        keys: ['author', 'title'],
+        inCart: response.data.filter(book => book.inCart === true),
 
+        //keys: Object.keys(response.data) // use if you want all the keys
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+    
 
     componentDidMount() {
     this.getBooks()
@@ -117,6 +128,7 @@ class App extends Component {
           searchString={this.state.searchString} 
           sortBy={this.props.sortBy}
           editing={this.state.editing}
+          editBook={this.editBook}
           removeBook={this.removeBook}
           updateBook={this.updateBook}
           />        
@@ -127,10 +139,14 @@ class App extends Component {
               toggleCart={ this.toggleCart }
             /> :  null
            }
-              { this.state.editing ?
-           <EditBook handleUpdateBook={handleUpdateBook} getBooks={this.getBooks}/>
-           :<NewBook handleCreateBook={this.handleCreateBook} getBooks={this.getBooks}/>
-
+          { 
+               this.state.editing ?
+              <EditBook
+              editBook={this.editBook}
+              />           
+              :
+              <NewBook addBook={this.addBook} getBooks={this.getBooks}/>
+              
            }
           <Footer editing={this.state.editing}
             toggleAdmin= { this.toggleAdmin }

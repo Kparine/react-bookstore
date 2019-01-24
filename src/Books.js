@@ -1,5 +1,4 @@
 import React from 'react'
-import { removeBook, updateBook }  from './EditBook'
 
 const btnStyle = {
   background: '#7ea8ea'
@@ -15,7 +14,7 @@ const rowStyle = {
 }
 
 
-function Books ({id, title, author, pages, price ,inCart, toggleCart, removeBook, editing, updateBook, toggleAdmin, getBooks, handleCreateBook}) {
+function Books ({id, title, author, pages, price ,inCart, toggleCart, removeBook, editing, editBook, toggleAdmin, getBooks, handleCreateBook}) {
   const AddCart = inCart ? 'Remove from Cart' : 'Add to Cart' 
   
   return (
@@ -24,17 +23,17 @@ function Books ({id, title, author, pages, price ,inCart, toggleCart, removeBook
     
       <div className="col-md-3">{title}</div>
       <div className="col-md-2">{author}</div>
-      <div className="col-md-2">{pages} pages</div>
+      <div className="col-md-2">{pages}</div>
       <div className="col-md-2">{price}</div>
-      {  !editing ?
+      { !editing ?
       <button className="col-md-2 btn add-button" style={btnStyle} onClick={() => toggleCart(id)}>
-        <span role='img' aria-label='cart'><strong>🛒  </strong>{AddCart}</span> 
+        <span role='img' aria-label='cart'><strong><span role='img' aria-label='alt'>🛒 </span> </strong>{AddCart}</span> 
       </button>
       :
       <div>
-        <button className="btn" style={editStyle} onClick={()=> updateBook(id)}>✎ Edit</button>
+        <button className="btn" style={editStyle} onClick={()=>editBook(id)}>✎ Edit</button>
         <span>  </span>
-        <button className="btn" style={delStyle} onClick={()=> removeBook(id)}>🗑 Delete</button>
+        <button className="btn" style={delStyle} onClick={()=>removeBook(id)}>🗑 Delete</button>
       </div>
       }
     </div>

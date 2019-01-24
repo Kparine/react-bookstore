@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import Books from './Books'
 
 
+
 export default class BookList extends Component {
-  constructor(props) {
-    super(props)
-  }
+
 
 searchBook = (ele) => {
-console.log(ele.title);
 
   const normTitle = ele.title.toLowerCase()
   const normSearchString = this.props.searchString.toLowerCase()
@@ -26,15 +24,19 @@ render() {
     <div>
       {
         filteredBooks.length !== 0 ?
-        filteredBooks.sort(this.byColumns).map(book => <Books 
+        filteredBooks.sort(this.byColumns).map(book => 
+        
+        <Books 
         key={book.id} 
         toggleCart={this.props.toggleCart}
         editing={this.props.editing}
-        updateBook={this.props.updateBook}
         createBook={this.props.createBook}
         removeBook={this.props.removeBook}
+        editBook={this.props.editBook}
         getBooks={this.props.getBooks}
-        {...book}/>) :
+        {...book}/>
+        ) 
+        :
         <div> <strong>Book Does Not Exist...</strong></div>
         }
     </div>

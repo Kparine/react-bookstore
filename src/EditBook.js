@@ -10,16 +10,22 @@ export default class EditBook extends Component {
     this.state = {
       title: this.props.title,
       author: this.props.author,
-      pages: 0,
-      price: 0
+      pages: this.props.pages,
+      price: this.props.price
     }
   } 
 
- handleUpdateBook = async(id, book) => {
-      await axios.patch(`${url}/books/${id}`)
-    }
+  handleUpdateBook = async(id, book) => {
+    await axios.patch(`${url}/books/${id}`)
+     .then(() => {
+        this.props.getBooks()
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
-  handleEditSubmit = (e) => {
+  onSubmit = (e) => {
     e.preventDefault()
 
     let book = {
@@ -32,15 +38,15 @@ export default class EditBook extends Component {
     this.setState = {
       title: '',
       author: '',
-      pages: 0,
-      price: 0
+      pages: '',
+      price: ''
     }
-    this.props.updateBook(this.state.id, book)
+    this.props.editBook(this.state.id, book)
   }
     
 render() {
     return (
-      <form className="md-3" data-book={this.state.id} onSubmit={this.handleUpdateBook}>
+      <form className="md-3" data-book={this.state.id} onSubmit={this.onSubmit}>
         <div className="form-group">
         <br></br>
           <label htmlFor="title"><strong>Update Book...</strong>
