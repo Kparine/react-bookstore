@@ -18,12 +18,13 @@ export default class EditBook extends Component {
   }
 
   handleUpdateBook = async(id, book) => {
-    await axios.patch(`${url}/${id}`)
-     .then(() => {
+    await axios.put(`${url}/${id}`, book)     
+    .then(() => {
         this.props.getBooks()
+        this.props.setAdmin(false, false )
       })
-      .catch(error => {
-        console.log(error)
+      .catch(err => {
+        console.log(err)
       })
   }
 

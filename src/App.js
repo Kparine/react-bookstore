@@ -119,8 +119,12 @@ class App extends Component {
   }
     
 
-    componentDidMount() {
+  componentDidMount() {
     this.getBooks()
+  }
+
+  setAdmin = (show, editing) => {
+    this.setState({Admin: show, editing, editBook: null})
   }
 
   render() {    
@@ -151,7 +155,8 @@ class App extends Component {
           { 
                this.state.editBook ?
                 <EditBook
-                showEditBook={this.showEditBook} {...this.state.editBook}
+                showEditBook={this.showEditBook} getBooks={this.getBooks} {...this.state.editBook}
+                setAdmin={this.setAdmin}
                 />           
               :
               <NewBook addBook={this.addBook} getBooks={this.getBooks}/>

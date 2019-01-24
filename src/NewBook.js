@@ -15,7 +15,7 @@ export default class NewBook extends Component{
     }
   }
 
-  handleSubmit = (e) => {
+  onSubmit = (e) => {
     e.preventDefault()   
      
     axios.post(url, {
@@ -43,7 +43,7 @@ export default class NewBook extends Component{
   render() { 
 
     return (
-      <form className="md-3" data-book={this.state.id} onSubmit={this.handleSubmit}>
+      <form className="md-3" data-book={this.state.id} onSubmit={this.onSubmit}>
         <div className="form-group">
         <br></br>
           <label htmlFor="title"><strong>Add A New Book...</strong>
